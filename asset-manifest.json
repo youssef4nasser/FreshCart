@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/Happy-shop-e-commerce/static/css/main.04601bbc.css",
+    "main.js": "/Happy-shop-e-commerce/static/js/main.77b6d1fd.js",
+    "static/media/fa-solid-900.ttf": "/Happy-shop-e-commerce/static/media/fa-solid-900.2877d54f94f30c5d563c.ttf",
+    "static/media/fa-brands-400.ttf": "/Happy-shop-e-commerce/static/media/fa-brands-400.13e40630e5866f777de8.ttf",
+    "static/media/fa-solid-900.woff2": "/Happy-shop-e-commerce/static/media/fa-solid-900.bdb9e23299f9d1320a8b.woff2",
+    "static/media/fa-brands-400.woff2": "/Happy-shop-e-commerce/static/media/fa-brands-400.7be2266f1be21c44ecd4.woff2",
+    "static/media/logo2.webp": "/Happy-shop-e-commerce/static/media/logo2.5b49fe17408f87ad26c8.webp",
+    "static/media/fa-regular-400.ttf": "/Happy-shop-e-commerce/static/media/fa-regular-400.146404900f7550a9719d.ttf",
+    "static/media/fa-regular-400.woff2": "/Happy-shop-e-commerce/static/media/fa-regular-400.8bedd7cfa43a6c358cdd.woff2",
+    "static/media/app-store.svg": "/Happy-shop-e-commerce/static/media/app-store.e5aa550a658e1765dbb40cf6b3a38113.svg",
+    "static/media/google-play.svg": "/Happy-shop-e-commerce/static/media/google-play.4cf9f5b4e46adc5f504afb9c6ff0f156.svg",
+    "static/media/02.png": "/Happy-shop-e-commerce/static/media/02.76441f3b1d343a19223f.png",
+    "static/media/fa-v4compatibility.ttf": "/Happy-shop-e-commerce/static/media/fa-v4compatibility.6c0a7b774ffa1cf0a059.ttf",
+    "static/media/fa-v4compatibility.woff2": "/Happy-shop-e-commerce/static/media/fa-v4compatibility.497d535001197a9c5b38.woff2",
+    "static/media/slick.svg": "/Happy-shop-e-commerce/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/Happy-shop-e-commerce/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/Happy-shop-e-commerce/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/Happy-shop-e-commerce/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/Happy-shop-e-commerce/index.html",
+    "main.04601bbc.css.map": "/Happy-shop-e-commerce/static/css/main.04601bbc.css.map",
+    "main.77b6d1fd.js.map": "/Happy-shop-e-commerce/static/js/main.77b6d1fd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04601bbc.css",
+    "static/js/main.77b6d1fd.js"
+  ]
+}
