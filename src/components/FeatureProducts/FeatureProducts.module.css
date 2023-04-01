@@ -1,0 +1,14 @@
+/* .btn-add{
+    color: #fff !important;
+    transition: 1s !important;
+    transform: translateY(100%)!important;
+    opacity: 0 !important;
+}
+
+.product-item:hover .btn-add {
+    color: aqua !important;
+
+    opacity: 1 !important;
+    transform: translateY(0%)!important;
+}
+ */
