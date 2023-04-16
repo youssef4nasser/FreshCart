@@ -18,7 +18,6 @@ export default function Login({saveUserData}) {
     let {data} = await axios.post("https://route-ecommerce.onrender.com/api/v1/auth/signin", values).catch((error)=>{
       setisloading(false);
       setmessageError(`${error.response.data.errors.param} : ${error.response.data.errors.msg}`)
-      console.log(error.response.data)
     })
 
     if(data.message === "success"){

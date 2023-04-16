@@ -11,6 +11,11 @@
   background-color: var(--main-color);
 }
 
+
+.btn:hover{
+  background-color: var(--main-color);
+}
+
 .main-text{
   color: var(--main-color); 
 }
@@ -27,8 +32,22 @@
   color: var(--rating-color);
 }
 
+.border-main{
+  border: solid 1px var(--main-color);
+}
+
 .cursor-pointer{
   cursor: pointer;
+}
+
+.network{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 9999;
+  box-shadow: var(--shadow);
+  background-color: #fff;
+  padding: 10px;
 }
 
 .product-item .btn-add{

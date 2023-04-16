@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react'
+import './BrandProducts.module.css';
 import axios from 'axios';
-import style from './FeatureProducts.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import { cartContext } from '../../Context/CartContext';
 import { toast } from 'react-hot-toast';
-import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
-export default function FeatureProducts() {
+
+export default function BrandProducts() {
   let {addToCart, setnumbOfCartItems} = useContext(cartContext);
 
   async function addProdut(productId){
@@ -21,32 +22,32 @@ export default function FeatureProducts() {
     }
   }
 
-  const [products, setProducts] = useState([]);
+  const [allProducts, setallProducts] = useState([]);
   const [isLoading, setisLoading] = useState(false);
+  const {id} = useParams();
 
-  async function getProducts() {
-    setisLoading(true)
-    let { data } = await axios.get(`https://route-ecommerce.onrender.com/api/v1/products`);
-    setProducts(data.data);
+  async function getBrandProducts(){
+    setisLoading(true);
+    const {data} = await axios.get("https://route-ecommerce.onrender.com/api/v1/products",{
+      params: {"brand": id}
+    });
+    setallProducts(data.data)
     setisLoading(false);
   }
 
   useEffect(() => {
-    getProducts();
+    getBrandProducts();
   }, [])
+  
 
-  return  <>
-    <section className='py-5'>
-
-      <div className="container">
-        <div className="row">
-          {isLoading?<LoadingScreen />:
-          <>
-          {products.map(product => (
-          <div  key={product._id} className="col-md-3">
+  return <>
+  {isLoading? <LoadingScreen />: <section className='py-5'>
+        <div className="container">
+          <div className="row">
+            {allProducts.length == 0? <h2 className='text-center'>No Products Available right Now...</h2>: allProducts.map((product,i)=>{return <div  key={product._id} className="col-md-3">
             <div className='product-item'>
               <i className="fa-regular fa-heart"></i>
-              <Link to={`ProductDetails/${product._id}`}> 
+              <Link to={`/ProductDetails/${product._id}`}> 
                 <img className='w-100'  src={product.imageCover} alt={product.title} />
                 <span className='main-text fw-bold'>{product.category.name}</span>
                 <h3 className='h-6 fw-bold py-3'>{product.title.split(" ").slice(0,2).join(" ")}</h3>
@@ -61,14 +62,10 @@ export default function FeatureProducts() {
               </Link>
               <button onClick={()=>addProdut(product._id)} className='btn btn-add main-bg text-white w-100'>+ Add</button>
             </div>
-          </div>
-        ))}
-          </>
+          </div>})}
           
-          }
-
+          </div>
         </div>
-      </div>
-    </section>
+      </section> }
   </>
 }

@@ -1,10 +1,28 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import './Productdetails.module.css';
 import Slider from "react-slick";
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import { cartContext } from '../../Context/CartContext';
+import { toast } from 'react-hot-toast';
 
 export default function Productdetails() {
+
+  let {addToCart, setnumbOfCartItems} = useContext(cartContext);
+
+  async function addProdut(productId){
+    let response = await addToCart(productId);
+
+    if(response?.data?.status === "success"){
+      setnumbOfCartItems(response?.data?.numOfCartItems);
+      toast.success(response.data.message, {duration:2000, position:"bottom-right", className:"border-success border"})
+    }
+    else{
+      toast.error("Error", {duration:2000});
+    }
+  }
+
   const [ProductDetails,setProductDetails] = useState(null);
   const [isLoading, setisLoading] = useState(false);
 
@@ -27,22 +45,21 @@ export default function Productdetails() {
 
   useEffect(()=>{
     getProductdetails(params.id)
-    console.log(params.id)
   },[])
 
   return <>
-  <section>
+  <section className='py-5'>
       <div className="container">
         <div className="row align-items-center justify-content-center">
 
-          {isLoading?
-           <div className='text-center position-fixed top-0 start-0 end-0 w-100 h-100 bg-light d-flex align-items-center justify-content-center'><i className='fas fa-spinner fa-spin fa-3x main-text'></i></div>: <>
+          {isLoading? <LoadingScreen />: <>
           
           <div className="col-md-4">
           <Slider {...settings}>
-            {ProductDetails?.images.map((img)=> <img src={img} /> )}
+            {ProductDetails?.images.map((img, i)=> <img key={i} src={img} /> )}
           </Slider>
           </div>
+
           <div className="col-md-8">
           <h3>{ProductDetails?.title}</h3>
           <p className='my-4'>{ProductDetails?.description}</p>
@@ -54,7 +71,7 @@ export default function Productdetails() {
               </i>
             </span>
           </div>
-          <button className='btn btn-add main-bg text-white w-100'>+ Add</button>
+          <button onClick={()=>addProdut(ProductDetails._id)} className='btn btn-add main-bg text-white w-100'>+ Add</button>
           </div>
           
           </>}

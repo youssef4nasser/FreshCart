@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="row">
           <div className="col-12">
             <div className="footer-input d-flex justify-content-between">
-              <input type="email" class="form-control w-75" id="exampleFormControlInput1" placeholder="Email"/>
+              <input type="email" className="form-control w-75" id="exampleFormControlInput1" placeholder="Email"/>
               <button className='btn main-bg text-white'>Share App Link</button>
             </div>
           </div>

@@ -1,8 +1,9 @@
-import React from 'react'
 import styles from './Mainslider.module.css';
+import React from "react";
 
-export default function Mainslider() {
+export default function Mainslider () {
+
   return <>
-      <div>Mainslider</div>
-    </>
+  <h2>Mainslider</h2>
+  </>
 }

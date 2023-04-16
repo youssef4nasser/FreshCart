@@ -1,14 +1,19 @@
-/* .btn-add{
-    color: #fff !important;
-    transition: 1s !important;
-    transform: translateY(100%)!important;
-    opacity: 0 !important;
+/* .product_item .btn_add{
+    transition: all 1s , opacity 1s;
+    transform: translateY(100%);
+    opacity: 0;
 }
 
-.product-item:hover .btn-add {
-    color: aqua !important;
-
-    opacity: 1 !important;
-    transform: translateY(0%)!important;
+.product_item:hover .btn_add {
+    opacity: 1;
+    transform: translateY(0%);
 }
- */
+
+.product_item{
+  transition: all 1s ease-in-out;
+}
+
+.product_item:hover{
+  border: 1px solid var(--main-color);
+  box-shadow: var(--shadow);
+} */
