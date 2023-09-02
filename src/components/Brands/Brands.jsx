@@ -33,9 +33,9 @@ export default function Brands() {
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium?</p>
         </div>
         {brands.map((brand)=>{ return <div key={brand._id} className="col-md-3">
-          <Link to={`/BrandProducts/${brand._id}`}>
-          <img src={brand.image} alt="" />
-          <h6 className='text-center'>{brand.name}</h6>
+          <Link to={`/BrandProducts/brand/${brand._id}`}>
+            <img src={brand.image} alt="" />
+            <h6 className='text-center'>{brand.name}</h6>
           </Link>
       </div>
         })}

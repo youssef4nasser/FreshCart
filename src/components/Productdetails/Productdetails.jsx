@@ -13,7 +13,7 @@ export default function Productdetails() {
 
   async function addProdut(productId){
     let response = await addToCart(productId);
-
+    
     if(response?.data?.status === "success"){
       setnumbOfCartItems(response?.data?.numOfCartItems);
       toast.success(response.data.message, {duration:2000, position:"bottom-right", className:"border-success border"})

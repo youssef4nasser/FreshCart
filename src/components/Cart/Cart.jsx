@@ -3,31 +3,34 @@ import styles from './Cart.module.css';
 import { cartContext } from '../../Context/CartContext';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import LoadingScreen from '../LoadingScreen/LoadingScreen.jsx';
 
 export default function Cart() {
   const [cartDetails, setcartDetails] = useState(null);
+  const [isLoading, setisLoading] = useState(false);
 
   const {getLoggedUserCart, removeItem, updateProductCount} = useContext(cartContext);
 
   async function getCart(){
+    setisLoading(true)
     let response = await getLoggedUserCart();
     if(response?.data?.status === "success"){
       setcartDetails(response.data.data);
+      setisLoading(false)
     }
   }
 
   async function deleteItem(productId){
     let response = await removeItem(productId);
+        console.log(response);
     setcartDetails(response.data.data);
     toast("product removed");
-
   }
 
-    async function updateProductQuantity(productId, count){
+  async function updateProductQuantity(productId, count){
     let response = await updateProductCount(productId, count);
     setcartDetails(response.data.data);
     toast("product count UPdated");
-
   }
 
   useEffect(()=>{
@@ -35,7 +38,7 @@ export default function Cart() {
   },[])
 
   return <>
-  <section>
+  {isLoading? <LoadingScreen /> : <section>
     <div className="container">
       {cartDetails? <div className='bg-light p-4 my-4'>
       <h3>shop cart :</h3>
@@ -48,7 +51,7 @@ export default function Cart() {
             <div>
             <h6>{product.product.title}</h6>
             <h6 className='main-text'>{product.price} EGP</h6>
-            <button onClick={()=>deleteItem(product.product._id)} className='btn m-0 btn-sm p-1 text-bg-danger' ><i className='fa-regular fa-trash-can'></i> Remove</button>
+            <button onClick={()=>deleteItem(product.product._id)} className='btn m-0 btn-sm p-1 text-bg-danger'><i className='fa-regular fa-trash-can'></i> Remove</button>
             </div>
             <div>
               <button onClick={()=>updateProductQuantity(product.product._id, product.count+1)} className='btn border-main btn-sm'>+</button>
@@ -66,8 +69,6 @@ export default function Cart() {
     </div> : null}
 
     </div>
-  </section>
-
-  
+  </section>}
   </>
 }

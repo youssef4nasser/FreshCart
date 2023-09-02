@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 import { cartContext } from '../../Context/CartContext';
 import { toast } from 'react-hot-toast';
-
+import iconNoProducts from '../../assets/Icon-no-products.png'
 
 export default function BrandProducts() {
   let {addToCart, setnumbOfCartItems} = useContext(cartContext);
@@ -24,12 +24,13 @@ export default function BrandProducts() {
 
   const [allProducts, setallProducts] = useState([]);
   const [isLoading, setisLoading] = useState(false);
-  const {id} = useParams();
+  const {id, filterId} = useParams();
 
   async function getBrandProducts(){
+    console.log(filterId)
     setisLoading(true);
     const {data} = await axios.get("https://route-ecommerce.onrender.com/api/v1/products",{
-      params: {"brand": id}
+      params: {[filterId]: id}
     });
     setallProducts(data.data)
     setisLoading(false);
@@ -39,12 +40,12 @@ export default function BrandProducts() {
     getBrandProducts();
   }, [])
   
-
   return <>
   {isLoading? <LoadingScreen />: <section className='py-5'>
         <div className="container">
           <div className="row">
-            {allProducts.length == 0? <h2 className='text-center'>No Products Available right Now...</h2>: allProducts.map((product,i)=>{return <div  key={product._id} className="col-md-3">
+            {allProducts.length == 0? <img src={iconNoProducts} alt="No Products Available right Now..." /> :
+            allProducts.map((product,i)=>{return <div  key={product._id} className="col-md-3">
             <div className='product-item'>
               <i className="fa-regular fa-heart"></i>
               <Link to={`/ProductDetails/${product._id}`}> 

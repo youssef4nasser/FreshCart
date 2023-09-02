@@ -2,10 +2,8 @@ import React from 'react'
 import './Footer.module.css';
 
 import americanExpress from "../../assets/02.png"
-// import paypalicon from "../../assets/paypal.png"
 import mastercardicon from "../../assets/05.png"
 import viza from "../../assets/06.png"
-
 
 import appStore from "../../assets/app-store.svg"
 

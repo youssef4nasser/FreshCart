@@ -6,6 +6,7 @@ import Mainslider from '../Mainslider/Mainslider';
 
 export default function Home() {
   return <>
+    <Mainslider />
     <CategorySlider />
     <FeatureProducts />
   </>

@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import './Layout.module.css';
 
-export default function Layout({userData, setUserData}) {
+export default function Layout({setUserData, userData}) {
 
   let navigate = useNavigate();
 
@@ -14,9 +14,8 @@ export default function Layout({userData, setUserData}) {
     navigate("/login")
   }
 
-
   return <>
-  <Navbar LogOut={LogOut} suserData={userData}/>
+  <Navbar LogOut={LogOut} userData={userData}/>
   <Outlet></Outlet>
   <Footer />
   

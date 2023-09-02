@@ -5,12 +5,15 @@ import { Link } from 'react-router-dom';
 import { cartContext } from '../../Context/CartContext';
 import { toast } from 'react-hot-toast';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import { wishlistContext } from '../../Context/wishlistContext.js';
 
 export default function FeatureProducts() {
   let {addToCart, setnumbOfCartItems} = useContext(cartContext);
+  let {addToWishlist} = useContext(wishlistContext);
 
-  async function addProdut(productId){
+    async function addProdut(productId){
     let response = await addToCart(productId);
+    console.log(response.data)
 
     if(response?.data?.status === "success"){
       setnumbOfCartItems(response?.data?.numOfCartItems);
@@ -19,6 +22,17 @@ export default function FeatureProducts() {
     else{
       toast.error("Error", {duration:2000});
     }
+  }
+
+  async function addWishList(productId){
+    let response = await addToWishlist(productId);
+    if(response?.data?.status === "success"){
+      // setnumbOfWishlistItems(response?.data?.numOfCartItems);
+      toast.success(response.data.message, {duration:2000, position:"bottom-right", className:"border-success border"})
+    }
+    // else{
+    //   toast.error("Error when to add product in Wishlist", {duration:2000});
+    // }
   }
 
   const [products, setProducts] = useState([]);
@@ -37,21 +51,19 @@ export default function FeatureProducts() {
 
   return  <>
     <section className='py-5'>
-
       <div className="container">
-        <div className="row">
+        <div className="row g-4">
           {isLoading?<LoadingScreen />:
           <>
           {products.map(product => (
           <div  key={product._id} className="col-md-3">
-            <div className='product-item'>
-              <i className="fa-regular fa-heart"></i>
+            <div className='product-item h-100 p-3'>
               <Link to={`ProductDetails/${product._id}`}> 
-                <img className='w-100'  src={product.imageCover} alt={product.title} />
-                <span className='main-text fw-bold'>{product.category.name}</span>
-                <h3 className='h-6 fw-bold py-3'>{product.title.split(" ").slice(0,2).join(" ")}</h3>
-                <div className='d-flex justify-content-between'>
-                  <span className='text-muted'>{product.price}EGP</span>
+                <img className='w-100' src={product.imageCover} alt={product.title} />
+                <span className='main-text'>{product.category.name}</span>
+                <h2 className='text-black fw-bold pt-2 fs-6'>{product.title.split(" ").slice(0,2).join(" ")}</h2>
+                <div className='d-flex pb-2 justify-content-between'>
+                  <span className='text-black-50'>{product.price}EGP</span>
                   <span>
                     <i className='fas fa-star rating-color'>
                       {product.ratingsAverage}
@@ -59,14 +71,15 @@ export default function FeatureProducts() {
                   </span>
                 </div>
               </Link>
-              <button onClick={()=>addProdut(product._id)} className='btn btn-add main-bg text-white w-100'>+ Add</button>
+              <div className="d-flex justify-content-between">
+                <button onClick={()=>addWishList(product._id)} type="submit" className="btn border-main mt-auto w-7"><i class="fa-regular fa-heart"></i></button>
+                <button onClick={()=>addProdut(product._id)} className='btn border-main w-75 mt-auto'>Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>
+              </div>
             </div>
           </div>
         ))}
           </>
-          
           }
-
         </div>
       </div>
     </section>

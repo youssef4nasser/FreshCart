@@ -1,4 +1,4 @@
-import { createBrowserRouter, parsePath, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Layout from "./components/Layout/Layout"
 import Home from "./components/Home/Home"
@@ -14,18 +14,22 @@ import jwtDecode from 'jwt-decode';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Productdetails from './components/Productdetails/Productdetails';
 import { CartContextProvider } from './Context/CartContext';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Checkout from './components/Checkout/Checkout';
-import { Offline, Online } from "react-detect-offline";
+import { Offline } from "react-detect-offline";
 import BrandProducts from './components/BrandProducts/BrandProducts';
+import Wishlist from './components/Wishlist/Wishlist';
+import Orders from './components/orders/orders';
+import Products from './components/Products/Products.jsx';
+import { WishlistContextProvider } from './Context/wishlistContext.js';
 
 function App() {
 
-useEffect(()=>{
-  if(localStorage.getItem("userToken")!== null){
-    saveUserData();
-  }
-},[])
+  useEffect(()=>{
+    if(localStorage.getItem("userToken")!== null){
+      saveUserData();
+    }
+  },[])
 
   const [userData, setUserData] = useState(null);
   
@@ -37,18 +41,20 @@ useEffect(()=>{
 
   const routers = createBrowserRouter([
   {path:"", element: <Layout setUserData={setUserData} userData={userData}/>,children:[
-    {path:"/", element: <Home />},
-    {path:"home", element: <Home />},
-    {path:"Happy-shop-e-commerce", element: <ProtectedRoute><Home /></ProtectedRoute>},
-    {path:"Categories", element: <ProtectedRoute><Categories /></ProtectedRoute>},
-    {path:"Brands", element: <ProtectedRoute><Brands /></ProtectedRoute>},
+    {index: true, element: <Home />},
+    {path:"FreshCart", element: <Home />},
+    {path:"Categories", element: <Categories />},
+    {path:"Brands", element: <Brands />},
+    {path:"products", element: <Products />},
     {path:"Cart", element: <ProtectedRoute><Cart /></ProtectedRoute>},
+    {path:"Wishlist", element: <ProtectedRoute><Wishlist /></ProtectedRoute>},
+    {path:"orders", element: <ProtectedRoute><Orders userData={userData} /></ProtectedRoute>},
 
-    {path:"BrandProducts/:id", element: <ProtectedRoute><BrandProducts /></ProtectedRoute>},
+    {path:"BrandProducts/:filterId/:id", element: <BrandProducts />},
 
     {path:"Checkout", element: <ProtectedRoute><Checkout /></ProtectedRoute>},
 
-    {path:"Productdetails/:id", element: <ProtectedRoute><Productdetails /></ProtectedRoute>},
+    {path:"Productdetails/:id", element: <Productdetails />},
     {path:"*", element: <Notfound />},
 
     {path:"login", element: <Login saveUserData={saveUserData}/>},
@@ -58,8 +64,10 @@ useEffect(()=>{
 
   return <CartContextProvider>
     <Offline><div className='network'>Only shown offline (surprise!)</div></Offline>
-  <Toaster />
-  <RouterProvider router={routers}></RouterProvider>
+    <Toaster />
+    <WishlistContextProvider>
+      <RouterProvider router={routers}></RouterProvider>
+    </WishlistContextProvider> 
   </CartContextProvider>
   
 }

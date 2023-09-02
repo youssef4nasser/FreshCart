@@ -8,8 +8,6 @@ export default function Checkout() {
 
   async function handleSubmit(values){
     let response = await onlinePayment(cartId, values)
-    console.log(response)
-    console.log(values);
     if(response.data.status === "success"){
       window.location.href = response.data.session.url
     }
