@@ -28,13 +28,13 @@ export default function WishList() {
   {isLoading? <LoadingScreen /> : <section>
     <div className="container">
     <h3>Wishlist :</h3>
-    {wishlistDetails.map((product)=> <div key={product.product._id} className="row align-items-center border-bottom py-2">
+    {wishlistDetails?.map((product)=> <div key={product?.product?._id} className="row align-items-center border-bottom py-2">
           <div className="col-md-1">
-            <img src={product.product.imageCover} className='w-100' alt="" />
+            <img src={product?.product?.imageCover} className='w-100' alt="" />
           </div>
           <div className="col-md-11 d-flex justify-content-between">
             <div>
-            <h6>{product.product.title}</h6>
+            <h6>{product?.product?.title}</h6>
             <h6 className='main-text'>{product.price} EGP</h6>
             {/* <button onClick={()=>deleteItem(product.product._id)} className='btn m-0 btn-sm p-1 text-bg-danger'><i className='fa-regular fa-trash-can'></i> Remove</button> */}
             </div>
